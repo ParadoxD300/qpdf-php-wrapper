@@ -1,6 +1,6 @@
 <?php
 
-namespace Msmahon\QpdfPhpWrapper\Enums;
+namespace ParadoxD300\QpdfPhpWrapper\Enums;
 
 enum ExitCode: int
 {

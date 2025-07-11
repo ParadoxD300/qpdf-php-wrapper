@@ -1,30 +1,34 @@
 {
-    "name": "msmahon/qpdf-php-wrapper",
+    "name": "paradoxd300/qpdf-php-wrapper",
     "type": "library",
     "description": "A simple PHP wrapper for QPDF",
     "keywords": ["qpdf", "pdf"],
-    "homepage": "https://github.com/msmahon/qpdf-php-wrapper",
+    "homepage": "https://github.com/ParadoxD300/qpdf-php-wrapper",
     "license": "MIT",
     "authors": [
         {
             "name": "Mitchell Mahoney",
             "email": "mahoneymitch@gmail.com"
+        },
+        {
+            "name": "Travis Turner",
+            "email": "travis@turbopassusa.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Msmahon\\QpdfPhpWrapper\\": "src/"
+            "ParadoxD300\\QpdfPhpWrapper\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Msmahon\\QpdfPhpWrapper\\Tests\\": "tests/"
+            "ParadoxD300\\QpdfPhpWrapper\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
     "require": {
         "php": "^8.1",
-        "symfony/process": "^6.4.2"
+        "symfony/process": "^6.4.2|^7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.6"
