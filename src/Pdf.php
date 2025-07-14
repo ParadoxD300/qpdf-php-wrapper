@@ -10,6 +10,18 @@ use Symfony\Component\Process\Process;
 
 class Pdf
 {
+    protected string $executablePath;
+
+    /**
+     * Constructor.
+     *
+     * @param string $executablePath The absolute path to the qpdf executable.
+     */
+    public function __construct(string $executablePath = 'qpdf')
+    {
+        $this->executablePath = $executablePath;
+    }
+
     /**
      * Get the version of qpdf installed on the server
      *
@@ -18,7 +30,7 @@ class Pdf
      */
     public function getQpdfVersion(): int
     {
-        $process = new Process(['qpdf', '--version']);
+        $process = new Process([$this->executablePath, '--version']);
         $process->run();
         preg_match('/qpdf version (?<version>\d+)\./', $process->getOutput(), $matches);
         if (! $this->isSuccessful($process)) {
@@ -35,7 +47,7 @@ class Pdf
      */
     public function fileIsPdf(string $path): bool
     {
-        $process = new Process(['qpdf', '--check', $path]);
+        $process = new Process([$this->executablePath, '--check', $path]);
         $process->run();
         return $this->isSuccessful($process);
     }
@@ -49,7 +61,7 @@ class Pdf
      */
     public function getNumberOfPages(string $path): int
     {
-        $process = new Process(['qpdf', '--show-npages', $path]);
+        $process = new Process([$this->executablePath, '--show-npages', $path]);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -69,7 +81,7 @@ class Pdf
      */
     public function rotate(string $path, Rotation $direction, string $range): bool
     {
-        $process = new Process(['qpdf', $path, "--rotate=$direction->value:$range", '--', '--replace-input']);
+        $process = new Process([$this->executablePath, $path, "--rotate=$direction->value:$range", '--', '--replace-input']);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -87,7 +99,7 @@ class Pdf
      */
     public function trimToRange(string $path, string|int $range): bool
     {
-        $process = new Process(['qpdf', $path, '--pages', '.', $range, '--', '--replace-input']);
+        $process = new Process([$this->executablePath, $path, '--pages', '.', $range, '--', '--replace-input']);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -114,7 +126,7 @@ class Pdf
      */
     public function combineRangesFromFiles(array $filePages, string $outputPath): bool
     {
-        $process = new Process(['qpdf', '--empty', '--pages', ...$this->flatten($filePages), '--', $outputPath]);
+        $process = new Process([$this->executablePath, '--empty', '--pages', ...$this->flatten($filePages), '--', $outputPath]);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -150,7 +162,7 @@ class Pdf
     public function copyPages(string $path, string $outputPath, string $range): bool
     {
         $pages = $this->parseRange($range, $path);
-        $process = new Process(['qpdf', '--empty', '--pages', $path, join(',', $pages), '--', $outputPath]);
+        $process = new Process([$this->executablePath, '--empty', '--pages', $path, join(',', $pages), '--', $outputPath]);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -172,7 +184,7 @@ class Pdf
     public function removePages(string $path, string|int $range): bool
     {
         $pagesToCopy = implode(',', array_diff(range(1, $this->getNumberOfPages($path)), $this->parseRange($range, $path)));
-        $process = new Process(['qpdf', $path, '--pages', $path, $pagesToCopy, '--', '--replace-input']);
+        $process = new Process([$this->executablePath, $path, '--pages', $path, $pagesToCopy, '--', '--replace-input']);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -189,7 +201,7 @@ class Pdf
      */
     public function jsonInfo(string $path): mixed
     {
-        $process = new Process(['qpdf', $path, '--json']);
+        $process = new Process([$this->executablePath, $path, '--json']);
         $process->run();
         if (!$this->isSuccessful($process)) {
             throw new ProcessFailedException($process);
@@ -324,7 +336,7 @@ class Pdf
             $range = ['--repeat=1'];
         }
         $process = new Process([
-            'qpdf',
+            $this->executablePath,
             $documentPath,
             '--overlay',
             $stampPath,
