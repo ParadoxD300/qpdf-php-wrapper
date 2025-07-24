@@ -2,4 +2,4 @@
 
 require_once 'vendor/autoload.php';
 
-$class = new \ParadoxD300\QpdfPhpWrapper\Pdf();
+$class = new \TurboPass\QpdfPhpWrapper\Pdf();

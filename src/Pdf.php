@@ -1,10 +1,10 @@
 <?php
 
-namespace ParadoxD300\QpdfPhpWrapper;
+namespace TurboPass\QpdfPhpWrapper;
 
 use Exception;
-use ParadoxD300\QpdfPhpWrapper\Enums\ExitCode;
-use ParadoxD300\QpdfPhpWrapper\Enums\Rotation;
+use TurboPass\QpdfPhpWrapper\Enums\ExitCode;
+use TurboPass\QpdfPhpWrapper\Enums\Rotation;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
