@@ -1,10 +1,10 @@
 <?php
 
-namespace TurboPass\QpdfPhpWrapper\Tests;
+namespace ParadoxD300\QpdfPhpWrapper\Tests;
 
 use Exception;
-use TurboPass\QpdfPhpWrapper\Enums\Rotation;
-use TurboPass\QpdfPhpWrapper\Pdf;
+use ParadoxD300\QpdfPhpWrapper\Enums\Rotation;
+use ParadoxD300\QpdfPhpWrapper\Pdf;
 use PHPUnit\Framework\TestCase;
 
 class PdfTest extends TestCase

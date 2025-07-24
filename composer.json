@@ -1,9 +1,9 @@
 {
-    "name": "turbopass/qpdf-php-wrapper",
+    "name": "paradoxd300/qpdf-php-wrapper",
     "type": "library",
     "description": "A simple PHP wrapper for QPDF",
     "keywords": ["qpdf", "pdf"],
-    "homepage": "https://github.com/TurboPass/qpdf-php-wrapper",
+    "homepage": "https://github.com/ParadoxD300/qpdf-php-wrapper",
     "license": "MIT",
     "authors": [
         {
@@ -17,12 +17,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "TurboPass\\QpdfPhpWrapper\\": "src/"
+            "ParadoxD300\\QpdfPhpWrapper\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TurboPass\\QpdfPhpWrapper\\Tests\\": "tests/"
+            "ParadoxD300\\QpdfPhpWrapper\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
